@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "dependencies": {},
   "devDependencies": {
-    "command-line-args": "^5.0.2"
+    "command-line-args": "^5.0.2",
+    "lodash": "^4.17.10"
+  },
+  "scripts": {
+    "start": "node index.js --help"
   }
 }
