@@ -3,10 +3,16 @@
   "version": "0.1.0",
   "dependencies": {},
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
     "command-line-args": "^5.0.2",
     "lodash": "^4.17.10"
   },
   "scripts": {
+    "build": "NODE_ENV=production babel src --out-dir build",
+    "run": "npm run build && node build/index.js",
     "multiclone": "node index.js -m"
   }
 }
