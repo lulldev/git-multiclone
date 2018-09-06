@@ -1,5 +1,13 @@
 {
   "webdev2018": {
-    "base": "https://github.com/lulldev/git-multiclone.git"
+    "KalaginIvan": {
+      "base": "https://github.com/lulldev/git-multiclone.git"
+    }
+  },
+  "job": {
+    "mtc": {
+      "frontend": "https://lulldev@bitbucket.org/mtcllc/mtc.fr.git",
+      "mobile": "https://lulldev@bitbucket.org/mtcllc/kwbt_app.git"
+    }
   }
 }

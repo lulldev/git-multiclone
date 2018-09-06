@@ -16,8 +16,8 @@ export default class GitMulticlone {
     if (!fs.existsSync(GitMulticlone.SPACES_PATH)){
       fs.mkdirSync(GitMulticlone.SPACES_PATH);
     }
-    fs.stat(SPACES_CONFIG, (err) => {
-      if(err.code == 'ENOENT') {
+    fs.stat(GitMulticlone.SPACES_CONFIG, (err) => {
+      if(err && err.code === 'ENOENT') {
         fs.writeFileSync(GitMulticlone.SPACES_CONFIG, JSON.stringify({
           "space-name": [
             {
@@ -33,6 +33,7 @@ export default class GitMulticlone {
   }
 
   startClone() {
+    console.log('Start multicloning...');
     if (!fs.existsSync(GitMulticlone.SPACES_CONFIG)) {
       console.log('Space file not found!');
       process.exit(-1);
@@ -44,11 +45,17 @@ export default class GitMulticlone {
       if (!fs.existsSync(currentSpacePath)){
         fs.mkdirSync(currentSpacePath);
       }
-      const repoData = spaceFileContent[spaceName];
+      const projectData = spaceFileContent[spaceName];
+      const projectName = Object.keys(projectData)[0];
+      const projectPath = `${currentSpacePath}/${projectName}`;
+      if (!fs.existsSync(projectPath)){
+        fs.mkdirSync(projectPath);
+      }
+      const repoData = projectData[projectName];
       Object.entries(repoData).forEach((repo) => {
-        const dirName = repo[0];
+        const repoName = repo[0];
         const repoUrl = repo[1];
-        const repoPath = `spaces/${spaceName}/${dirName}`;
+        const repoPath = `${projectPath}/${repoName}`;
         this.reclone(repoUrl, repoPath);
       });
     });
