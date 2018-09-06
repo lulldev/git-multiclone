@@ -1,17 +1,5 @@
 {
-  "webdev2018": [
-    {
-      "Ivanov": {
-        "base": "https://github.com/"
-      }
-    }
-  ],
-  "job": [
-    {
-      "mtc.ll": {
-        "kwbt": "https://github.com/",
-        "booking": "https://github.com/"
-      }
-    }
-  ]
+  "webdev2018": {
+    "base": "https://github.com/lulldev/git-multiclone.git"
+  }
 }

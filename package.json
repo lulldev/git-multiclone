@@ -8,11 +8,12 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "command-line-args": "^5.0.2",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "rimraf": "^2.6.2"
   },
   "scripts": {
     "build": "NODE_ENV=production babel src --out-dir build",
-    "run": "npm run build && node build/index.js",
-    "multiclone": "node index.js -m"
+    "start": "npm run build && npm run multiclone",
+    "multiclone": "node build/index.js -m"
   }
 }

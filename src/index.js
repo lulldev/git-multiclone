@@ -1,5 +1,4 @@
 import commandLineArgs from 'command-line-args';
-import fs from 'fs';
 import _  from 'lodash';
 import GitMulticlone from './multiclone';
 
