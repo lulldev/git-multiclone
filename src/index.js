@@ -1,7 +1,7 @@
-const commandLineArgs = require('command-line-args');
-const fs = require('fs');
-const _  = require('lodash');
-const GitMulticlone = require('./multiclone');
+import commandLineArgs from 'command-line-args';
+import fs from 'fs';
+import _  from 'lodash';
+import GitMulticlone from './multiclone';
 
 const startupOptionDifinition = [
   { name: 'init_spaces', alias: 'i', type: Boolean },
