@@ -46,39 +46,37 @@ export default class GitMulticlone {
         fs.mkdirSync(currentSpacePath);
       }
       const projectData = spaceFileContent[spaceName];
-      const projectName = Object.keys(projectData)[0];
-      const projectPath = `${currentSpacePath}/${projectName}`;
-      if (!fs.existsSync(projectPath)){
-        fs.mkdirSync(projectPath);
-      }
-      const repoData = projectData[projectName];
-      Object.entries(repoData).forEach((repo) => {
-        const repoName = repo[0];
-        const repoUrl = repo[1];
-        const repoPath = `${projectPath}/${repoName}`;
-        this.reclone(repoUrl, repoPath);
+      const projectList = Object.keys(projectData);
+      projectList.forEach((projectName) => {
+        const projectPath = `${currentSpacePath}/${projectName}`;
+        if (!fs.existsSync(projectPath)){
+          fs.mkdirSync(projectPath);
+        }
+        const repoData = projectData[projectName];
+        Object.entries(repoData).forEach((repo) => {
+          const repoName = repo[0];
+          const repoUrl = repo[1];
+          const repoPath = `${projectPath}/${repoName}`;
+          this.reclone(repoUrl, repoPath);
+        });
       });
     });
   }
 
   reclone(repoUrl, repoPath) {
-    if (!fs.existsSync(repoPath)){
-      exec(`git clone ${repoUrl} ${repoPath}`, (err, stdout, stderr) => {
-        if (err) {
-          console.log(`Error new reclone: ${repoPath}`);
-          console.log(stderr);
-          return;
-        }
-      });
-    }
-    else {
-      exec(`cd ${repoPath} && git fetch --all && git reset --hard origin/master && git pull`, (err, stdout, stderr) => {
-        if (err) {
-          console.log(`Error reclone exist repo: ${repoPath}`);
-          console.log(stderr);
-          return;
-        }
-      });
-    }
+    const recloneCommand = (!fs.existsSync(repoPath)) 
+      ? `git clone ${repoUrl} ${repoPath}`
+      : `cd ${repoPath} && git fetch --all && git reset --hard origin/master && git pull`;
+
+    exec(recloneCommand, (err, stdout, stderr) => {
+      if (err) {
+        console.log(`- error reclone: ${repoPath}`);
+        console.log(stderr);
+        return;
+      }
+      else {
+        console.log(`+ cloning ${repoUrl} complete!`);
+      }
+    });
   }
 }
