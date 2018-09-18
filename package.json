@@ -16,6 +16,6 @@
   "scripts": {
     "build": "NODE_ENV=production babel src --out-dir build",
     "start-init": "npm run build && node build/index.js -i",
-    "start-multiclone": "npm run build && node build/index.js -m"
+    "start": "npm run build && node build/index.js -m"
   }
 }
